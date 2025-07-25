@@ -1,9 +1,47 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ShieldUs" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Theme.ShieldUs" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_purple</item>
+        <item name="colorPrimaryVariant">#8A4EBF</item>  <!-- Versione più scura del viola -->
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/primary_blue_light</item>
+        <item name="colorSecondaryVariant">@color/primary_blue_lighter</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/primary_purple</item>
+        <item name="android:navigationBarColor">@color/white</item>
+
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+
+        <item name="materialButtonStyle">@style/Widget.ShieldUs.Button</item>
+        <item name="textInputStyle">@style/Widget.ShieldUs.TextInputLayout</item>
     </style>
 
-    <style name="Theme.ShieldUs" parent="Base.Theme.ShieldUs" />
+    <style name="Widget.ShieldUs.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primary_purple</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Widget.ShieldUs.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/primary_purple</item>
+        <item name="hintTextColor">@color/primary_purple</item>
+        <item name="android:textColorHint">@color/text_secondary</item>
+
+        <item name="boxStrokeErrorColor">@color/error</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+
+        <item name="android:textColor">@color/black</item>
+
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+
+        <item name="boxBackgroundColor">@color/white</item>
+    </style>
 </resources>
