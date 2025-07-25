@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Colori principali -->
+    <color name="primary_purple">#A066CB</color>
+    <color name="primary_blue_light">#86C7ED</color>
+    <color name="primary_blue_lighter">#9ED2F0</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="text_primary">@color/black</color>
+    <color name="text_secondary">#80000000</color>
+    <color name="text_on_primary">@color/white</color>
+
+    <color name="background">@color/white</color>
+    <color name="surface">@color/white</color>
+    <color name="error">#FF0000</color>
 </resources>
