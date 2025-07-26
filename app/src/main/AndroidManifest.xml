@@ -34,6 +34,10 @@
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.EducationActivity" />
+        <activity android:name=".activities.QuizActivity" />
+        <activity android:name=".activities.QuizResultsActivity" />
+        <activity android:name=".activities.ModuleIntroActivity" />
     </application>
 
 </manifest>
