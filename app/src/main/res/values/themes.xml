@@ -17,6 +17,9 @@
 
         <item name="materialButtonStyle">@style/Widget.ShieldUs.Button</item>
         <item name="textInputStyle">@style/Widget.ShieldUs.TextInputLayout</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Widget.ShieldUs.Button" parent="Widget.MaterialComponents.Button">
