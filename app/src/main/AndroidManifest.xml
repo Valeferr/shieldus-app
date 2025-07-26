@@ -38,6 +38,7 @@
         <activity android:name=".activities.QuizActivity" />
         <activity android:name=".activities.QuizResultsActivity" />
         <activity android:name=".activities.ModuleIntroActivity" />
+        <activity android:name=".activities.ChatbotActivity" />
     </application>
 
 </manifest>

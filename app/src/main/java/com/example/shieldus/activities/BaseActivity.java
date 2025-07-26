@@ -31,7 +31,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     }
 
     protected void setupNavigationDrawer() {
-        // Inizializza le view
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
@@ -73,6 +72,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
         else if (id == R.id.nav_education && !(this instanceof EducationActivity)) {
             startActivity(new Intent(this, EducationActivity.class));
+        }
+        else if (id == R.id.nav_chatbot && !(this instanceof ChatbotActivity)) {
+            startActivity(new Intent(this, ChatbotActivity.class));
         }
 //        else if (id == R.id.nav_map && !(this instanceof MapActivity)) {
 //            startActivity(new Intent(this, MapActivity.class));

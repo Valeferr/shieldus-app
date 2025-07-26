@@ -2,4 +2,18 @@
     <string name="app_name">ShieldUs</string>
     <string name="navigation_drawer_open">Apri menu</string>
     <string name="navigation_drawer_close">Chiudi menu</string>
+
+    <string name="chatbot_welcome_message">Ciao! Sono il chatbot legale di ShieldUs. Posso aiutarti con informazioni su discriminazioni, molestie o altri problemi lavorativi. Puoi descrivermi brevemente la tua situazione o selezionare una domanda comune dall\'elenco.</string>
+    <string name="chatbot_default_response">Mi dispiace, non ho capito bene la tua situazione. Puoi descrivermela in modo più dettagliato? Oppure seleziona una domanda specifica dall\'elenco in alto.</string>
+    <string name="chatbot_suggestions">Ecco alcuni argomenti su cui posso aiutarti:\n- Discriminazione sul lavoro\n- Molestie sessuali\n- Licenziamento ingiusto\n- Stipendio non pagato\n\nPuoi descrivermi la tua situazione usando queste parole chiave.</string>
+    <string name="hint_type_message">Scrivi il tuo messaggio...</string>
+    <string name="button_send">Invia</string>
+
+    <string-array name="predifined_legal_questions">
+        <item>Seleziona una domanda</item>
+        <item>Come posso denunciare una discriminazione sul lavoro?</item>
+        <item>Cosa fare in caso di molestie sessuali?</item>
+        <item>Come comportarsi con un licenziamento ingiusto?</item>
+        <item>Cosa fare se non mi pagano lo stipendio?</item>
+    </string-array>
 </resources>

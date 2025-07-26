@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_education"
         android:title="Educazione"/>
     <item
+        android:id="@+id/nav_chatbot"
+        android:icon="@drawable/ic_chat"
+        android:title="ChatBot"/>
+    <item
         android:id="@+id/nav_map"
         android:icon="@drawable/ic_map"
         android:title="Mappa Servizi"/>
