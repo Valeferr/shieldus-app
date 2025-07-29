@@ -98,14 +98,12 @@ public class ChatbotActivity extends BaseActivity {
         if (!message.isEmpty()) {
             addUserMessage(message);
             messageEditText.setText("");
-
             messageEditText.postDelayed(() -> processUserMessage(message), 1000);
         }
     }
 
     private void processUserMessage(String userMessage) {
         String lowerCaseMsg = userMessage.toLowerCase();
-
         String response = getString(R.string.chatbot_default_response);
 
         for (Map.Entry<String, String> entry : LEGAL_RESPONSES.entrySet()) {
@@ -114,7 +112,6 @@ public class ChatbotActivity extends BaseActivity {
                 break;
             }
         }
-
         addBotMessage(response);
 
         if (response.equals(getString(R.string.chatbot_default_response))) {
