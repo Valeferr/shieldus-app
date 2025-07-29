@@ -54,6 +54,10 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         setupNavigationDrawer();
         setToolbarTitle("Mappa Servizi");
 
+        if (getIntent().getBooleanExtra("show_centers", false)) {
+            filterCentersByType("antiviolenza");
+        }
+
         SupportMapFragment mapFragment = (SupportMapFragment)
                 getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {

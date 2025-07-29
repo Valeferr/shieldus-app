@@ -9,6 +9,18 @@
     <string name="hint_type_message">Scrivi il tuo messaggio...</string>
     <string name="button_send">Invia</string>
 
+    <string name="emergency_violence_title">Violenza Domestica\n1522</string>
+    <string name="emergency_psychological_title">Supporto Psicologico\n800 833 833</string>
+    <string name="emergency_medical_title">Emergenza Medica\n118</string>
+    <string name="emergency_centers_title">Centri Antiviolenza</string>
+    <string name="emergency_general_title">Numero Unico Emergenza\n112</string>
+    <string name="emergency_centers_message">Trova il centro antiviolenza più vicino nella nostra mappa dei servizi</string>
+    <string name="confirm_call">Chiamare %s?</string>
+    <string name="call_number">Stai per chiamare: %s</string>
+    <string name="open_map">Apri Mappa</string>
+    <string name="call">Chiama</string>
+    <string name="cancel">Annulla</string>
+
     <string-array name="predifined_legal_questions">
         <item>Seleziona una domanda</item>
         <item>Come posso denunciare una discriminazione sul lavoro?</item>
@@ -53,5 +65,4 @@
         <item>Casa delle Donne Perugia|Via Baglioni 12, Perugia|antiviolenza|+39 075 9988774</item>
         <item>Ambulatorio Sociale Reggio Calabria|Via Marina 8, Reggio Calabria|clinica|+39 0965 112244</item>
     </string-array>
-
 </resources>

@@ -106,12 +106,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         else if (id == R.id.nav_chatbot && !(this instanceof ChatbotActivity)) {
             startActivity(new Intent(this, ChatbotActivity.class));
         }
-//        else if (id == R.id.nav_map && !(this instanceof MapActivity)) {
-//            startActivity(new Intent(this, MapActivity.class));
-//        }
-//        else if (id == R.id.nav_emergency && !(this instanceof EmergencyActivity)) {
-//            startActivity(new Intent(this, EmergencyActivity.class));
-//        }
+        else if (id == R.id.nav_map && !(this instanceof MapActivity)) {
+            startActivity(new Intent(this, MapActivity.class));
+        }
+        else if (id == R.id.nav_emergency && !(this instanceof EmergencyActivity)) {
+            startActivity(new Intent(this, EmergencyActivity.class));
+        }
 //        else if (id == R.id.nav_settings && !(this instanceof SettingsActivity)) {
 //            startActivity(new Intent(this, SettingsActivity.class));
 //        }

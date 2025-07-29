@@ -50,6 +50,7 @@
         <activity android:name=".activities.ModuleIntroActivity" />
         <activity android:name=".activities.ChatbotActivity" />
         <activity android:name=".activities.MapActivity" />
+        <activity android:name=".activities.EmergencyActivity"/>
     </application>
 
 </manifest>
