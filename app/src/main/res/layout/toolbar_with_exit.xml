@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.MaterialToolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/primary_blue_light"
+    android:elevation="8dp"
+    app:navigationIcon="@drawable/ic_menu"
+    app:titleTextColor="@color/white">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnExit"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:text="Uscita rapida"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:background="@drawable/button_exit"
+        android:padding="8dp"
+        android:minWidth="100dp"
+        android:contentDescription="Pulsante di uscita rapida per nascondere l'applicazione"
+        app:strokeColor="@color/white"
+        app:strokeWidth="1dp"/>
+
+</com.google.android.material.appbar.MaterialToolbar>

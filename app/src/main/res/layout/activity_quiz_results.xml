@@ -13,14 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/primary_blue_light"
-            android:elevation="4dp"
-            android:titleTextColor="@color/white"
-            app:navigationIcon="@drawable/ic_menu"/>
+        <include layout="@layout/toolbar_with_exit" />
 
         <RelativeLayout
             android:layout_width="match_parent"

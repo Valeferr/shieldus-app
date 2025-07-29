@@ -6,13 +6,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.example.shieldus.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -22,12 +23,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     protected DrawerLayout drawerLayout;
     protected NavigationView navigationView;
     protected MaterialToolbar toolbar;
+    protected Button btnExit;
     protected boolean isAnonymous;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     protected void setupNavigationDrawer() {
@@ -53,14 +54,43 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
 
         updateNavHeader();
+        setupQuickExitButton();
+    }
+
+    protected void setupQuickExitButton() {
+        btnExit = findViewById(R.id.btnExit);
+        if (btnExit != null) {
+            btnExit.setOnClickListener(v -> performQuickExit());
+        }
+    }
+
+    protected void performQuickExit() {
+        try {
+            String googleUrl = "https://www.google.com";
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(googleUrl));
+
+            if (browserIntent.resolveActivity(getPackageManager()) != null) {
+                browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(browserIntent);
+
+                finishAffinity();
+                System.exit(0);
+            } else {
+                Toast.makeText(this, "Nessun browser disponibile, chiusura dell'app...", Toast.LENGTH_SHORT).show();
+                finishAffinity();
+                System.exit(0);
+            }
+        } catch (Exception e) {
+            finishAffinity();
+            System.exit(0);
+        }
     }
 
     protected void updateNavHeader() {
         View headerView = navigationView.getHeaderView(0);
         TextView textViewEmail = headerView.findViewById(R.id.textViewEmail);
 
-        // Qui puoi impostare l'email dell'utente loggato
-        // Esempio: textViewEmail.setText(user.getEmail());
+        //TODO: logica login
     }
 
     @Override

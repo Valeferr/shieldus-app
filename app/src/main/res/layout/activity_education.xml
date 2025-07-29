@@ -19,12 +19,8 @@
             android:layout_height="wrap_content"
             android:background="@color/primary_purple">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="@drawable/ic_arrow_back"
-                app:titleTextColor="@color/white" />
+            <include layout="@layout/toolbar_with_exit" />
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
