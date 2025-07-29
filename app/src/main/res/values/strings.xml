@@ -16,4 +16,42 @@
         <item>Come comportarsi con un licenziamento ingiusto?</item>
         <item>Cosa fare se non mi pagano lo stipendio?</item>
     </string-array>
+
+    <string name="search_hint">Cerca città o indirizzo...</string>
+    <string-array name="service_filters">
+        <item>Tutti</item>
+        <item>Antiviolenza</item>
+        <item>Cliniche</item>
+        <item>Supporto Psicologico</item>
+    </string-array>
+
+    <string-array name="service_types">
+        <item>Tipo servizio</item>
+        <item>Centro antiviolenza</item>
+        <item>Clinica specialistica</item>
+        <item>Supporto psicologico</item>
+        <item>Assistenza legale</item>
+    </string-array>
+
+    <string-array name="service_centers_data">
+        <item>Centro Antiviolenza Milano|Via Roma 1, Milano|antiviolenza|+39 02 12345678</item>
+        <item>Clinica Malattie Sessuali Roma|Via Colosseo 10, Roma|cliniche|+39 06 87654321</item>
+        <item>Centro Donna Torino|Via Garibaldi 25, Torino|supporto psicologico|+39 011 1234567</item>
+        <item>Centro Salute Roma|Via Nazionale 45, Roma|clinica|+39 06 6789123</item>
+        <item>Centro Antiviolenza Milano|Corso Buenos Aires 10, Milano|antiviolenza|+39 02 3456789</item>
+        <item>Consultorio Famiglie Bologna|Via Zamboni 15, Bologna|supporto psicologico|+39 051 9876543</item>
+        <item>Clinica Pediatrica Napoli|Via Toledo 75, Napoli|clinica|+39 081 1122334</item>
+        <item>Centro Aiuto Donne Venezia|Piazza San Marco 20, Venezia|antiviolenza|+39 041 5566778</item>
+        <item>Centro Ascolto Genova|Via XX Settembre 33, Genova|supporto psicologico|+39 010 9988776</item>
+        <item>Consultorio Familiare Palermo|Via Maqueda 200, Palermo|clinica|+39 091 3344556</item>
+        <item>Centro Donne Bari|Corso Vittorio Emanuele 50, Bari|antiviolenza|+39 080 4433221</item>
+        <item>Poliambulatorio Sociale Trento|Via del Suffragio 10, Trento|clinica|+39 0461 445566</item>
+        <item>Spazio Donna Cagliari|Via Roma 99, Cagliari|supporto psicologico|+39 070 7788990</item>
+        <item>Centro Sicurezza Verona|Via Mazzini 23, Verona|antiviolenza|+39 045 6677889</item>
+        <item>Centro Medico Udine|Via Aquileia 75, Udine|clinica|+39 0432 776655</item>
+        <item>Supporto Psicologico Parma|Borgo della Salina 11, Parma|supporto psicologico|+39 0521 445599</item>
+        <item>Casa delle Donne Perugia|Via Baglioni 12, Perugia|antiviolenza|+39 075 9988774</item>
+        <item>Ambulatorio Sociale Reggio Calabria|Via Marina 8, Reggio Calabria|clinica|+39 0965 112244</item>
+    </string-array>
+
 </resources>

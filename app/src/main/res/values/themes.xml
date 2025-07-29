@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.ShieldUs" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ShieldUs" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_purple</item>
-        <item name="colorPrimaryVariant">#8A4EBF</item>  <!-- Versione più scura del viola -->
+        <item name="colorPrimaryVariant">#8A4EBF</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <item name="colorSecondary">@color/primary_blue_light</item>
@@ -46,5 +46,17 @@
         <item name="boxCornerRadiusBottomStart">8dp</item>
 
         <item name="boxBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="DropdownMenuStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/primary_purple</item>
+        <item name="hintTextColor">@color/primary_purple</item>
+        <item name="android:textColorHint">@color/primary_purple</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="DropdownItemStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:padding">16dp</item>
     </style>
 </resources>

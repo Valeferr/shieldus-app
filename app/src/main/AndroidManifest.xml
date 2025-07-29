@@ -1,7 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
     <uses-permission android:name="android.permission.INTERNET" />
     <queries>
         <intent>
@@ -21,6 +27,10 @@
         android:theme="@style/Theme.ShieldUs"
         tools:targetApi="31">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}"/>
+
         <activity
             android:name=".activities.WelcomeActivity"
             android:exported="true"
@@ -39,6 +49,7 @@
         <activity android:name=".activities.QuizResultsActivity" />
         <activity android:name=".activities.ModuleIntroActivity" />
         <activity android:name=".activities.ChatbotActivity" />
+        <activity android:name=".activities.MapActivity" />
     </application>
 
 </manifest>
