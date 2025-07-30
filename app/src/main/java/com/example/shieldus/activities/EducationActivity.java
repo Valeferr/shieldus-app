@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.shieldus.R;
@@ -40,11 +41,21 @@ public class EducationActivity extends BaseActivity {
     private void createSampleModules() {
         moduleList.clear();
 
-        String[] ids = {"1", "2", "3"};
-        String[] titles = {"Consenso nelle relazioni", "Salute Sessuale", "Diritti Legali"};
-        String[] descriptions = {"Impara a riconoscere e rispettare i confini nelle relazioni",
+        String[] ids = {"1", "2", "3", "4", "5"};
+        String[] titles = {
+                "Consenso nelle relazioni",
+                "Salute Sessuale",
+                "Diritti sul Lavoro",
+                "Relazioni Tossiche",
+                "Sicurezza Personale"
+        };
+        String[] descriptions = {
+                "Impara a riconoscere e rispettare i confini nelle relazioni",
                 "Informazioni essenziali sulla salute e sicurezza sessuale",
-                "Conosci i tuoi diritti in caso di discriminazione o violenza", };
+                "Conosci i tuoi diritti in ambito lavorativo",
+                "Riconosci e gestisci relazioni dannose",
+                "Impara le strategie fondamentali per riconoscere situazioni a rischio e proteggerti efficacemente nella vita quotidiana.",
+        };
         String[] details = {
                 // 1. Consenso nelle relazioni
                 "Il consenso è un accordo volontario, entusiasta, informato e continuo tra tutte le persone coinvolte in un’attività, specialmente nelle relazioni intime.\n\n" +
@@ -76,10 +87,52 @@ public class EducationActivity extends BaseActivity {
                         "- Ricevere un’educazione sessuale completa, scientifica e inclusiva.\n" +
                         "- Essere ascoltato/a con rispetto e riservatezza quando cerchi aiuto o informazioni.\n\n" +
                         "Conoscere i tuoi diritti ti permette di difenderti, tutelarti e supportare anche chi ti sta vicino.\n\n" +
-                        "Ricorda: nessuno ha il diritto di decidere sul tuo corpo o la tua libertà al posto tuo."
+                        "Ricorda: nessuno ha il diritto di decidere sul tuo corpo o la tua libertà al posto tuo.",
+
+                // 4. Relazioni Tossiche
+                "Una relazione tossica si riconosce da:\n\n" +
+                        "- Controllo eccessivo sulle tue attività\n" +
+                        "- Svalutazione costante delle tue opinioni\n" +
+                        "- Isolamento da amici e familiari\n" +
+                        "- Alternanza tra affetto e punizioni\n\n" +
+                        "Uscirne richiede:\n" +
+                        "1. Riconoscere il problema\n" +
+                        "2. Chiedere supporto a centri specializzati\n" +
+                        "3. Ricostruire la propria autonomia\n" +
+                        "4. Eventualmente denunciare se ci sono reati",
+
+                // 5. Difesa Personale
+                "Difesa Personale - Prevenzione e Autoprotezione\n\n" +
+                        "La difesa personale inizia con la consapevolezza e la prevenzione. " +
+                        "Non si tratta solo di tecniche fisiche, ma di un approccio completo per evitare situazioni pericolose.\n\n" +
+
+                        "Perché è importante?\n" +
+                        "• Prevenzione: L'80% delle aggressioni può essere evitato riconoscendo i segnali d'allarme\n" +
+                        "• Tecniche base: Movimenti semplici per liberarti da prese o blocchi\n" +
+                        "• Diritto alla sicurezza: Proteggere il tuo spazio personale\n\n" +
+
+                        "Cosa imparerai:\n" +
+                        "1. Valutazione del rischio in ambienti pubblici\n" +
+                        "2. Posizioni di sicurezza e allontanamento\n" +
+                        "3. Uso di oggetti comuni per difesa (es. chiavi, spray)\n" +
+                        "4. Come reagire a diverse tipologie di aggressione\n\n" +
+
+                        "Esempio pratico:\n" +
+                        "Se qualcuno ti afferra il polso:\n" +
+                        "1. Mantieni la calma\n" +
+                        "2. Ruota il braccio verso il pollice (punto debole)\n" +
+                        "3. Allontanati e cerca aiuto\n\n" +
+
+                        "<small>Ricorda: La difesa personale è un diritto legittimo di autoprotezione</small>"
         };
 
-        int[] icons = {R.drawable.ic_consent, R.drawable.ic_health, R.drawable.ic_legal};
+        int[] icons = {
+                R.drawable.ic_consent,
+                R.drawable.ic_medical_emergency,
+                R.drawable.ic_legal,
+                R.drawable.ic_psychological_support,
+                R.drawable.ic_default_module
+        };
 
         for (int i = 0; i < ids.length; i++) {
             int progress = ProgressManager.getProgress(this, ids[i]);
@@ -118,6 +171,7 @@ public class EducationActivity extends BaseActivity {
             }
         }
     }
+
 
     private void onModuleClicked(EducationModule module) {
         Intent intent = new Intent(this, ModuleIntroActivity.class);

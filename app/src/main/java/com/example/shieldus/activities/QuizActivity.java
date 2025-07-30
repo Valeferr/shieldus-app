@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.*;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import com.example.shieldus.R;
 import com.example.shieldus.models.QuizQuestion;
 import com.example.shieldus.persistence.ProgressManager;
-
 import java.util.*;
 
 public class QuizActivity extends BaseActivity {
@@ -62,27 +59,55 @@ public class QuizActivity extends BaseActivity {
     }
 
     private void loadQuestionsForModule(String moduleId) {
-        questions.add(new QuizQuestion(
-                "Cos'è il consenso?",
-                Arrays.asList(
-                        "Quando una persona non si oppone",
-                        "Un accordo libero ed entusiasta",
-                        "Qualcosa che non può essere revocato",
-                        "Solo necessario per il primo rapporto"
-                ),
-                1
-        ));
+        String[] questionTexts = null;
+        int[] correctAnswers = null;
+        String optionsPrefix = "";
 
-        questions.add(new QuizQuestion(
-                "Puoi ritirare il consenso dopo averlo dato?",
-                Arrays.asList(
-                        "No, è valido per sempre",
-                        "Solo se l'altra persona è d'accordo",
-                        "Sì, in qualsiasi momento",
-                        "Solo entro 24 ore"
-                ),
-                2
-        ));
+        switch (moduleId) {
+            case "1":
+                questionTexts = getResources().getStringArray(R.array.questions_consent);
+                correctAnswers = getResources().getIntArray(R.array.correct_answers_consent);
+                optionsPrefix = "options_consent_";
+                break;
+
+            case "2":
+                questionTexts = getResources().getStringArray(R.array.questions_sexual_health);
+                correctAnswers = getResources().getIntArray(R.array.correct_answers_sexual_health);
+                optionsPrefix = "options_sexual_health_";
+                break;
+
+            case "3":
+                questionTexts = getResources().getStringArray(R.array.questions_work_rights);
+                correctAnswers = getResources().getIntArray(R.array.correct_answers_work_rights);
+                optionsPrefix = "options_work_rights_";
+                break;
+
+            case "4":
+                questionTexts = getResources().getStringArray(R.array.questions_toxic_relationships);
+                correctAnswers = getResources().getIntArray(R.array.correct_answers_toxic_relationships);
+                optionsPrefix = "options_toxic_relationships_";
+                break;
+
+            case "5":
+                questionTexts = getResources().getStringArray(R.array.questions_safety);
+                correctAnswers = getResources().getIntArray(R.array.correct_answers_safety);
+                optionsPrefix = "options_safety_";
+                break;
+        }
+
+        if (questionTexts != null) {
+            for (int i = 0; i < questionTexts.length; i++) {
+                String arrayName = optionsPrefix + (i + 1);
+                int resourceId = getResources().getIdentifier(arrayName, "array", getPackageName());
+                String[] options = getResources().getStringArray(resourceId);
+
+                questions.add(new QuizQuestion(
+                        questionTexts[i],
+                        Arrays.asList(options),
+                        correctAnswers[i]
+                ));
+            }
+        }
     }
 
     private void showQuestion(int index) {
