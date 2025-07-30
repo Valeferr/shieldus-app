@@ -37,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         );
 
         btnLogin.setOnClickListener(v -> {
+            finish();
+
             String email = Objects.requireNonNull(etEmail.getText()).toString();
             String password = Objects.requireNonNull(etPassword.getText()).toString();
 
