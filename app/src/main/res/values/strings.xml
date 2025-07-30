@@ -9,6 +9,10 @@
     <string name="hint_type_message">Scrivi il tuo messaggio...</string>
     <string name="button_send">Invia</string>
 
+    <string name="article_image_desc">Immagine dell\'articolo</string>
+    <string name="author_image_desc">Immagine autore</string>
+    <string name="share_article">Condividi articolo</string>
+
     <string name="emergency_violence_title">Violenza Domestica\n1522</string>
     <string name="emergency_psychological_title">Supporto Psicologico\n800 833 833</string>
     <string name="emergency_medical_title">Emergenza Medica\n118</string>

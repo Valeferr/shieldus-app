@@ -12,15 +12,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/light_white"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/light_white">
 
         <include layout="@layout/toolbar_with_exit" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:overScrollMode="never">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,31 +29,32 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <RelativeLayout
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginBottom="24dp"
-                    android:background="@drawable/gradient_background"
-                    android:padding="16dp">
+                    app:cardBackgroundColor="@color/primary_purple"
+                    app:cardCornerRadius="12dp"
+                    app:strokeColor="@color/primary_purple_dark"
+                    app:strokeWidth="1dp">
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
+                        android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="Bentornato nella tua area sicura"
                         android:textColor="@color/white"
                         android:textSize="20sp"
-                        android:textStyle="bold"/>
-                </RelativeLayout>
+                        android:textStyle="bold"
+                        android:padding="16dp"/>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="6dp"
-                    app:cardUseCompatPadding="true">
+                    app:cardElevation="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -78,34 +80,40 @@
                             android:textColor="@color/black"
                             android:textSize="15sp"/>
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
+                    android:background="@drawable/section_header_background"
+                    android:paddingVertical="8dp"
                     android:text="Funzionalità Principali"
-                    android:textColor="@color/white"
-                    android:background="@color/primary_purple"
                     android:textAlignment="center"
-                    android:padding="2dp"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
 
-                <LinearLayout
+                <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:layout_marginBottom="24dp"
+                    android:columnCount="2"
+                    android:rowCount="2"
+                    android:alignmentMode="alignMargins"
+                    android:columnOrderPreserved="false"
+                    android:useDefaultMargins="true">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="0dp"
                         android:layout_height="120dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="8dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="4dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/card_stroke"
                         app:cardBackgroundColor="@color/white">
 
                         <LinearLayout
@@ -128,18 +136,22 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:text="Educazione"
+                                android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"/>
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="0dp"
                         android:layout_height="120dp"
-                        android:layout_weight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="8dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="4dp"
-                        android:background="@color/white"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/card_stroke"
                         app:cardBackgroundColor="@color/white">
 
                         <LinearLayout
@@ -162,26 +174,22 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:text="Mappa Servizi"
+                                android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"/>
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="0dp"
                         android:layout_height="120dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="8dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="4dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/card_stroke"
                         app:cardBackgroundColor="@color/white">
 
                         <LinearLayout
@@ -204,17 +212,22 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:text="Emergenza"
+                                android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"/>
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="0dp"
                         android:layout_height="120dp"
-                        android:layout_weight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="8dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="4dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/card_stroke"
                         app:cardBackgroundColor="@color/white">
 
                         <LinearLayout
@@ -237,96 +250,31 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:text="ChatBot"
+                                android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"/>
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </GridLayout>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
+                    android:background="@drawable/section_header_background"
+                    android:paddingVertical="8dp"
                     android:text="Ultimi Articoli"
-                    android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:background="@color/primary_purple"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:padding="2dp"
                     android:textStyle="bold"/>
 
-                <HorizontalScrollView
+                <FrameLayout
+                    android:id="@+id/articlesContainer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:scrollbars="none">
+                    android:layout_height="260dp"
+                    android:layout_marginBottom="24dp"/>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="280dp"
-                            android:layout_height="220dp"
-                            android:layout_marginEnd="16dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="4dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:background="@color/light_gray_background">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="120dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/ic_article"/>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:maxLines="2"
-                                    android:padding="12dp"
-                                    android:text="Come riconoscere una relazione sana"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold"/>
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="280dp"
-                            android:layout_height="220dp"
-                            android:layout_marginEnd="16dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="4dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:background="@color/light_gray_background">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="120dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/ic_article"/>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:maxLines="2"
-                                    android:padding="12dp"
-                                    android:text="Diritti sul lavoro: cosa devi sapere"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold"/>
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-                </HorizontalScrollView>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
