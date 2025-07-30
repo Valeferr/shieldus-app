@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.*;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import com.example.shieldus.R;
 import com.example.shieldus.models.QuizQuestion;
+import com.example.shieldus.persistence.ProgressManager;
+
 import java.util.*;
 
 public class QuizActivity extends BaseActivity {
@@ -20,6 +24,7 @@ public class QuizActivity extends BaseActivity {
     private int currentQuestionIndex = 0;
     private int score = 0;
     private boolean hasAnswered = false;
+    private String moduleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,24 +40,22 @@ public class QuizActivity extends BaseActivity {
         progressBar = findViewById(R.id.quizProgressBar);
         progressText = findViewById(R.id.progressText);
 
-        String moduleId = getIntent().getStringExtra("MODULE_ID");
+        moduleId = getIntent().getStringExtra("MODULE_ID");
         loadQuestionsForModule(moduleId);
+
+        currentQuestionIndex = ProgressManager.getQuizState(this, moduleId);
+
+        if (currentQuestionIndex >= questions.size()) {
+            currentQuestionIndex = 0;
+            score = 0;
+        }
 
         showQuestion(currentQuestionIndex);
 
         submitButton.setOnClickListener(v -> {
-            String buttonText = submitButton.getText().toString();
-
-            if (buttonText.equals("Conferma")) {
-                int selectedId = optionsGroup.getCheckedRadioButtonId();
-                if (selectedId == -1) {
-                    Toast.makeText(this, "Seleziona una risposta", Toast.LENGTH_SHORT).show();
-                } else {
-                    showFeedback(selectedId);
-                    hasAnswered = true;
-                    submitButton.setText("Prossima domanda");
-                }
-            } else if (buttonText.equals("Prossima domanda")) {
+            if (submitButton.getText().toString().equals("Conferma")) {
+                checkAnswer();
+            } else {
                 goToNext();
             }
         });
@@ -84,17 +87,19 @@ public class QuizActivity extends BaseActivity {
 
     private void showQuestion(int index) {
         if (index >= questions.size()) {
-            showResults();
+            finishQuiz();
             return;
         }
 
         hasAnswered = false;
         submitButton.setText("Conferma");
+        optionsGroup.clearCheck();
 
         QuizQuestion question = questions.get(index);
         questionText.setText(question.getQuestionText());
 
-        progressBar.setProgress((index * 100) / questions.size());
+        int progress = (int) (((float) (index) / questions.size()) * 100);
+        progressBar.setProgress(progress);
         progressText.setText(String.format(Locale.getDefault(), "%d/%d", index + 1, questions.size()));
 
         optionsGroup.removeAllViews();
@@ -106,24 +111,30 @@ public class QuizActivity extends BaseActivity {
             radioButton.setPadding(16, 16, 16, 16);
             radioButton.setId(i);
             radioButton.setEnabled(true);
-            radioButton.setBackgroundColor(Color.TRANSPARENT);
             radioButton.setTextColor(ContextCompat.getColor(this, R.color.black));
             optionsGroup.addView(radioButton);
         }
     }
 
-    private void showFeedback(int selectedId) {
+    private void checkAnswer() {
+        int selectedId = optionsGroup.getCheckedRadioButtonId();
+        if (selectedId == -1) {
+            Toast.makeText(this, "Seleziona una risposta", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         QuizQuestion question = questions.get(currentQuestionIndex);
         int correctIndex = question.getCorrectAnswerIndex();
 
         for (int i = 0; i < optionsGroup.getChildCount(); i++) {
             RadioButton option = (RadioButton) optionsGroup.getChildAt(i);
             option.setEnabled(false);
-        }
 
-        RadioButton correctButton = (RadioButton) optionsGroup.getChildAt(correctIndex);
-        correctButton.setBackgroundResource(R.drawable.correct_answer_background);
-        correctButton.setTextColor(Color.WHITE);
+            if (i == correctIndex) {
+                option.setBackgroundResource(R.drawable.correct_answer_background);
+                option.setTextColor(Color.WHITE);
+            }
+        }
 
         if (selectedId != correctIndex) {
             RadioButton selectedButton = (RadioButton) optionsGroup.getChildAt(selectedId);
@@ -132,6 +143,9 @@ public class QuizActivity extends BaseActivity {
         } else {
             score++;
         }
+
+        hasAnswered = true;
+        submitButton.setText("Prossima domanda");
     }
 
     private void goToNext() {
@@ -139,11 +153,50 @@ public class QuizActivity extends BaseActivity {
         showQuestion(currentQuestionIndex);
     }
 
-    private void showResults() {
-        Intent intent = new Intent(this, QuizResultsActivity.class);
-        intent.putExtra("SCORE", score);
-        intent.putExtra("TOTAL_QUESTIONS", questions.size());
-        startActivity(intent);
+    private void finishQuiz() {
+        int progress = (int) (((float) score / questions.size()) * 100);
+
+        ProgressManager.saveProgress(this, moduleId, progress);
+
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("MODULE_ID", moduleId);
+        resultIntent.putExtra("NEW_PROGRESS", progress);
+        resultIntent.putExtra("SCORE", score);
+        resultIntent.putExtra("TOTAL_QUESTIONS", questions.size());
+
+        setResult(RESULT_OK, resultIntent);
+
+        Intent resultsIntent = new Intent(this, QuizResultsActivity.class);
+        resultsIntent.putExtra("SCORE", score);
+        resultsIntent.putExtra("TOTAL_QUESTIONS", questions.size());
+        resultsIntent.putExtra("MODULE_ID", moduleId);
+        startActivity(resultsIntent);
+
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        savePartialProgress();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        savePartialProgress();
+    }
+
+    @Override
+    protected void onDestroy() {
+        savePartialProgress();
+        super.onDestroy();
+    }
+
+    private void savePartialProgress() {
+        if (currentQuestionIndex > 0) {
+            int partialProgress = (int) (((float) currentQuestionIndex / questions.size()) * 100);
+            ProgressManager.saveQuizState(this, moduleId, partialProgress, currentQuestionIndex, score);
+        }
     }
 }

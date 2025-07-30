@@ -1,6 +1,7 @@
 package com.example.shieldus.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -32,6 +33,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -107,11 +109,17 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
     }
 
     private void loadSampleData() {
-        String[] rawData = getResources().getStringArray(R.array.service_centers_data);
+        List<String> rawData = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.service_centers_data)));
+
+        SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        String globalCenters = prefs.getString("global_service_centers", "");
+        if (!globalCenters.isEmpty()) {
+            String[] entries = globalCenters.split(";;");
+            rawData.addAll(Arrays.asList(entries));
+        }
 
         new Thread(() -> {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
             for (String entry : rawData) {
                 String[] parts = entry.split("\\|");
                 if (parts.length == 4) {
@@ -253,13 +261,13 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
                 if (latLng != null) {
                     ServiceCenter center = new ServiceCenter(name, address, type, latLng, phone);
                     serviceCenters.add(center);
+                    saveToGlobalPrefs(center);
 
                     if (mMap != null) {
                         mMap.addMarker(new MarkerOptions()
                                 .position(latLng)
                                 .title(name)
-                                .snippet(address + "\n" + type + "\n" + phone)
-                        );
+                                .snippet(address + "\n" + type + "\n" + phone));
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
                     }
 
@@ -269,6 +277,17 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
                 }
             });
         }).start();
+    }
+
+    private void saveToGlobalPrefs(ServiceCenter center) {
+        SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        String existingData = prefs.getString("global_service_centers", "");
+        String newEntry = center.getName() + "|" + center.getAddress() + "|" + center.getType() + "|" + center.getPhoneNumber();
+
+        if (!existingData.contains(newEntry)) {
+            String updated = existingData.isEmpty() ? newEntry : existingData + ";;" + newEntry;
+            prefs.edit().putString("global_service_centers", updated).apply();
+        }
     }
 
     private LatLng geocodeAddress(String address) {

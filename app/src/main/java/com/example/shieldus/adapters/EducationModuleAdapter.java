@@ -16,14 +16,16 @@ public class EducationModuleAdapter extends RecyclerView.Adapter<EducationModule
 
     private final List<EducationModule> modules;
     private final OnModuleClickListener listener;
+    private final boolean isAnonymous;
 
     public interface OnModuleClickListener {
         void onModuleClick(EducationModule module);
     }
 
-    public EducationModuleAdapter(List<EducationModule> modules, OnModuleClickListener listener) {
+    public EducationModuleAdapter(List<EducationModule> modules, OnModuleClickListener listener, boolean isAnonymous) {
         this.modules = modules;
         this.listener = listener;
+        this.isAnonymous = isAnonymous;
     }
 
     @NonNull
@@ -38,18 +40,28 @@ public class EducationModuleAdapter extends RecyclerView.Adapter<EducationModule
     public void onBindViewHolder(@NonNull ModuleViewHolder holder, int position) {
         EducationModule module = modules.get(position);
 
-        if (module.isCompleted()) {
-            holder.itemView.setAlpha(0.6f);
-            holder.progressText.setText("Completato!");
-        } else {
-            holder.itemView.setAlpha(1f);
-            holder.progressText.setText(module.getProgress() + "% completato");
-        }
         holder.title.setText(module.getTitle());
         holder.description.setText(module.getDescription());
         holder.icon.setImageResource(module.getIconResId());
-        holder.progressBar.setProgress(module.getProgress());
-        holder.progressText.setText(module.getProgress() + "% completato");
+
+        if (!isAnonymous) {
+            holder.progressBar.setVisibility(View.VISIBLE);
+            holder.progressText.setVisibility(View.VISIBLE);
+
+            if (module.isCompleted()) {
+                holder.itemView.setAlpha(0.6f);
+                holder.progressText.setText("Completato!");
+            } else {
+                holder.itemView.setAlpha(1f);
+                holder.progressText.setText(module.getProgress() + "% completato");
+            }
+
+            holder.progressBar.setProgress(module.getProgress());
+        } else {
+            holder.progressBar.setVisibility(View.GONE);
+            holder.progressText.setVisibility(View.GONE);
+            holder.itemView.setAlpha(1f);
+        }
 
         holder.itemView.setOnClickListener(v -> listener.onModuleClick(module));
     }
@@ -57,6 +69,16 @@ public class EducationModuleAdapter extends RecyclerView.Adapter<EducationModule
     @Override
     public int getItemCount() {
         return modules.size();
+    }
+
+    public void updateModuleProgress(String moduleId, int progress) {
+        for (int i = 0; i < modules.size(); i++) {
+            if (modules.get(i).getId().equals(moduleId)) {
+                modules.get(i).setProgress(progress);
+                notifyItemChanged(i);
+                break;
+            }
+        }
     }
 
     static class ModuleViewHolder extends RecyclerView.ViewHolder {

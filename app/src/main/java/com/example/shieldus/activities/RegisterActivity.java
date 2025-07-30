@@ -1,6 +1,7 @@
 package com.example.shieldus.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.shieldus.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -40,7 +43,6 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         tvLoginLink = findViewById(R.id.tvLoginLink);
 
-        // Setup listeners
         setupTextWatchers();
         setupRegisterButton();
         setupLoginLink();
@@ -67,7 +69,25 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void setupRegisterButton() {
-        btnRegister.setOnClickListener(v -> attemptRegistration());
+        btnRegister.setOnClickListener(v -> {
+            String email = Objects.requireNonNull(etEmail.getText()).toString();
+            String password = Objects.requireNonNull(etPassword.getText()).toString();
+            String confirmPassword = Objects.requireNonNull(etConfirmPassword.getText()).toString();
+
+            if (!password.equals(confirmPassword)) {
+                Toast.makeText(this, "Le password non coincidono", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+            prefs.edit()
+                    .putString("email", email)
+                    .putString("password", password)
+                    .putBoolean("isAnonymous", false)
+                    .apply();
+
+            showRegistrationSuccessDialog();
+        });
     }
 
     private void setupLoginLink() {
@@ -78,15 +98,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void validateFields() {
-        // Nome
-        if (etName.getText().toString().trim().isEmpty()) {
+        if (Objects.requireNonNull(etName.getText()).toString().trim().isEmpty()) {
             nameLayout.setError("Inserisci il tuo nome");
         } else {
             nameLayout.setError(null);
         }
 
-        // Email
-        String email = etEmail.getText().toString().trim();
+        String email = Objects.requireNonNull(etEmail.getText()).toString().trim();
         if (email.isEmpty()) {
             emailLayout.setError("Inserisci un'email");
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -95,8 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
             emailLayout.setError(null);
         }
 
-        // Password
-        String password = etPassword.getText().toString();
+        String password = Objects.requireNonNull(etPassword.getText()).toString();
         if (password.isEmpty()) {
             passwordLayout.setError("Inserisci una password");
         } else if (password.length() < 6) {
@@ -105,33 +122,11 @@ public class RegisterActivity extends AppCompatActivity {
             passwordLayout.setError(null);
         }
 
-        // Conferma password
-        String confirmPassword = etConfirmPassword.getText().toString();
+        String confirmPassword = Objects.requireNonNull(etConfirmPassword.getText()).toString();
         if (!confirmPassword.equals(etPassword.getText().toString())) {
             confirmPasswordLayout.setError("Le password non coincidono");
         } else {
             confirmPasswordLayout.setError(null);
-        }
-    }
-
-    private boolean areFieldsValid() {
-        return nameLayout.getError() == null &&
-                emailLayout.getError() == null &&
-                passwordLayout.getError() == null &&
-                confirmPasswordLayout.getError() == null &&
-                !etName.getText().toString().trim().isEmpty() &&
-                !etEmail.getText().toString().trim().isEmpty() &&
-                !etPassword.getText().toString().isEmpty() &&
-                !etConfirmPassword.getText().toString().isEmpty();
-    }
-
-    private void attemptRegistration() {
-        validateFields();
-
-        if (areFieldsValid()) {
-            showRegistrationSuccessDialog();
-        } else {
-            Toast.makeText(this, "Correggi gli errori nel form", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -141,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .setMessage("Il tuo account è stato creato con successo! Ora puoi accedere con le tue credenziali.")
                 .setPositiveButton("Accedi", (dialog, which) -> {
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    intent.putExtra("email", etEmail.getText().toString().trim());
+                    intent.putExtra("email", Objects.requireNonNull(etEmail.getText()).toString().trim());
                     startActivity(intent);
                     finish();
                 })

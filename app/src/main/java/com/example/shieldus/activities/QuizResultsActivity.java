@@ -53,6 +53,11 @@ public class QuizResultsActivity extends BaseActivity {
             resultTitle.setText("Puoi fare meglio");
             resultMessage.setText("Rivedi i contenuti del modulo e riprova. Imparerai sicuramente!");
         }
-        findViewById(R.id.finishButton).setOnClickListener(v -> finish());
+        findViewById(R.id.finishButton).setOnClickListener(v -> {
+            Intent intent = new Intent(this, EducationActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
+        });
     }
 }

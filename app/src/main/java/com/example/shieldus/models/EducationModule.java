@@ -31,4 +31,9 @@ public class EducationModule {
     public boolean isCompleted() {
         return progress >= 100;
     }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+        isCompleted = progress >= 100;
+    }
 }

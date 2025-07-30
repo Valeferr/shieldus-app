@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -48,7 +49,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        isAnonymous = getIntent().getBooleanExtra("isAnonymous", false);
+        SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        isAnonymous = prefs.getBoolean("isAnonymous", true);
+
         if (isAnonymous) {
             showAnonymousReminder();
         }
@@ -72,7 +75,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             if (browserIntent.resolveActivity(getPackageManager()) != null) {
                 browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(browserIntent);
-
                 finishAffinity();
                 System.exit(0);
             } else {
@@ -90,7 +92,20 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         View headerView = navigationView.getHeaderView(0);
         TextView textViewEmail = headerView.findViewById(R.id.textViewEmail);
 
-        //TODO: logica login
+        SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        String email = prefs.getString("email", "Accesso anonimo");
+
+        if (textViewEmail != null) {
+            textViewEmail.setText(email);
+        }
+
+        if (isAnonymous) {
+            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_login).setVisible(true);
+        } else {
+            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
+        }
     }
 
     @Override
@@ -112,11 +127,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         else if (id == R.id.nav_emergency && !(this instanceof EmergencyActivity)) {
             startActivity(new Intent(this, EmergencyActivity.class));
         }
-//        else if (id == R.id.nav_settings && !(this instanceof SettingsActivity)) {
-//            startActivity(new Intent(this, SettingsActivity.class));
-//        }
         else if (id == R.id.nav_logout) {
             performLogout();
+        } else if (id == R.id.nav_login) {
+            startActivity(new Intent(this, LoginActivity.class));
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -128,6 +142,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 .setTitle("Esci")
                 .setMessage("Sei sicuro di voler uscire dall'applicazione?")
                 .setPositiveButton("Esci", (dialog, which) -> {
+                    getSharedPreferences("user_prefs", MODE_PRIVATE)
+                            .edit()
+                            .clear()
+                            .apply();
+
                     Intent intent = new Intent(this, LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);

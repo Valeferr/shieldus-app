@@ -15,6 +15,7 @@ import java.util.List;
 
 public class EducationActivity extends BaseActivity {
 
+    private static final int QUIZ_REQUEST_CODE = 1001;
     private RecyclerView modulesRecyclerView;
     private EducationModuleAdapter adapter;
     private List<EducationModule> moduleList = new ArrayList<>();
@@ -32,7 +33,7 @@ public class EducationActivity extends BaseActivity {
 
         createSampleModules();
 
-        adapter = new EducationModuleAdapter(moduleList, this::onModuleClicked);
+        adapter = new EducationModuleAdapter(moduleList, this::onModuleClicked, isAnonymous);
         modulesRecyclerView.setAdapter(adapter);
     }
 
@@ -97,37 +98,24 @@ public class EducationActivity extends BaseActivity {
         }
     }
 
-    public void updateModuleProgress(String moduleId, int newProgress) {
-        for (EducationModule module : moduleList) {
-            if (module.getId().equals(moduleId)) {
-                EducationModule updatedModule = new EducationModule(
-                        module.getId(),
-                        module.getTitle(),
-                        module.getDescription(),
-                        module.getDetailedContent(),
-                        module.getIconResId(),
-                        newProgress
-                );
-
-                int position = moduleList.indexOf(module);
-                moduleList.set(position, updatedModule);
-
-                if (adapter != null) {
-                    adapter.notifyItemChanged(position);
-                }
-                break;
-            }
-        }
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && data != null) {
+        if (requestCode == QUIZ_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             String moduleId = data.getStringExtra("MODULE_ID");
             int newProgress = data.getIntExtra("NEW_PROGRESS", 0);
-            updateModuleProgress(moduleId, newProgress);
+
+            if (adapter != null) {
+                adapter.updateModuleProgress(moduleId, newProgress);
+            }
+
+            for (EducationModule module : moduleList) {
+                if (module.getId().equals(moduleId)) {
+                    module.setProgress(newProgress);
+                    break;
+                }
+            }
         }
     }
 

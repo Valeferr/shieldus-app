@@ -58,6 +58,11 @@ public class AddServiceDialogFragment extends DialogFragment {
                 return;
             }
 
+            if (type.equalsIgnoreCase("Tutti")) {
+                Toast.makeText(getContext(), "Seleziona un tipo di servizio valido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (getActivity() instanceof MapActivity) {
                 ((MapActivity) getActivity()).addNewService(name, address, phone, type);
             }
