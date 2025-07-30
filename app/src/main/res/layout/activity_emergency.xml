@@ -14,12 +14,7 @@
         android:orientation="vertical"
         android:background="@color/light_white">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/primary_purple"
-            app:titleTextColor="@color/white"/>
+        <include layout="@layout/toolbar_with_exit" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -31,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Violenza Domestica -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -48,7 +42,6 @@
                         android:drawableTop="@drawable/ic_emergency_alert"/>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Supporto Psicologico -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,7 +58,6 @@
                         android:drawableTop="@drawable/ic_psychological_support"/>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Emergenza Medica -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -82,7 +74,6 @@
                         android:drawableTop="@drawable/ic_medical_emergency"/>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Centri Antiviolenza -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,7 +90,6 @@
                         android:drawableTop="@drawable/ic_shelter"/>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Chiamata Generica -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
