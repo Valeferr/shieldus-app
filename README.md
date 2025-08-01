@@ -139,7 +139,7 @@ La repository contiene:
 - `Assignment-1.docx`: Analisi iniziale, personas e requisiti UX
 - `Assignment-2.docx`: Casi d’uso e analisi comparativa
 - `Assignment-3.docx`: Design, prototipo e valutazione
-- `Assignment-4.docx`: Design, prototipo e valutazione
+- `Assignment-4.docx`: Feedback utenti e risultati test
 - Cartella `/app/src/main/java/` con codice Java
 - Cartella `/app/src/main/res/layout/` con layout XML
 - Prototipi Figma (link esterno)
