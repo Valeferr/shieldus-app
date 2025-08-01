@@ -30,22 +30,35 @@ ShieldUs nasce per colmare questo divario, offrendo uno **spazio sicuro, anonimo
 
 ## 🧩 Funzionalità Principali
 
-### 1. **Moduli Educativi Interattivi**
+### 1. **Taso di uscita rapida dall'applicazione**
+https://github.com/user-attachments/assets/80cea20c-2ec5-4d01-9fd0-cd58f070a4c7
+
+### 2. **Moduli Educativi Interattivi**
 - Percorsi educativi su consenso, parità di genere e salute sessuale
 - Quiz con feedback personalizzato
 - Gamification per un apprendimento coinvolgente
 
-### 2. **Chatbot Legale**
+https://github.com/user-attachments/assets/b45aa76c-6353-4196-8d87-5cdad1879015
+
+
+### 3. **Chatbot Legale**
 - Assistente conversazionale 24/7
 - Risposte basate su casi reali e validate da esperti
 - Guida alle procedure legali e ai contatti utili
 
-### 3. **Mappa Collaborativa dei Servizi**
+  https://github.com/user-attachments/assets/a2fb13c1-2b87-46b9-bbd2-a3b5db5d2fd3
+
+### 4. **Mappa Collaborativa dei Servizi**
 - Trova centri antiviolenza, cliniche specializzate, sportelli legali
 - Geolocalizzazione e filtri avanzati
 - Possibilità di contribuire in modo anonimo
 
-### 4. **Supporto Psicologico Urgente**
+
+https://github.com/user-attachments/assets/79deae94-8fd5-4fd3-9914-b286fa29cc97
+
+https://github.com/user-attachments/assets/653c1eea-16c5-4f4a-9a10-dad3de56ae89
+
+### 5. **Supporto Psicologico Urgente**
 - Accesso immediato a numeri verdi e linee di ascolto
 - Opzione di prenotazione consulto telefonico
 
