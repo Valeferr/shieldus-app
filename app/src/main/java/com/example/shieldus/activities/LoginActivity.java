@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.shieldus.R;
 import com.google.android.material.textfield.TextInputEditText;
-import java.util.Objects;
+import com.example.shieldus.utils.Utils;
 
 public class LoginActivity extends AppCompatActivity {
     private TextInputEditText etEmail, etPassword;
@@ -28,29 +28,31 @@ public class LoginActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
         String savedEmail = prefs.getString("email", null);
-        String savedPassword = prefs.getString("password", null);
-        if (savedEmail != null) etEmail.setText(savedEmail);
-        if (savedPassword != null) etPassword.setText(savedPassword);
+        if (savedEmail != null) {
+            etEmail.setText(savedEmail);
+        }
 
         tvRegisterLink.setOnClickListener(v ->
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class))
         );
 
         btnLogin.setOnClickListener(v -> {
-            finish();
+            String email = etEmail.getText().toString().trim();
+            String password = etPassword.getText().toString().trim();
 
-            String email = Objects.requireNonNull(etEmail.getText()).toString();
-            String password = Objects.requireNonNull(etPassword.getText()).toString();
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Inserisci email e password", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            String storedEmail = prefs.getString("email", null);
-            String storedPassword = prefs.getString("password", null);
-
-            if (email.equals(storedEmail) && password.equals(storedPassword)) {
-                prefs.edit().putBoolean("isAnonymous", false).apply();
+            if (isValidUser(email, password)) {
+                prefs.edit()
+                        .putString("email", email)
+                        .putBoolean("isAnonymous", false)
+                        .apply();
 
                 Toast.makeText(this, "Accesso riuscito", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, HomeActivity.class));
-                finish();
+                goToHome(email);
             } else {
                 Toast.makeText(this, "Credenziali errate", Toast.LENGTH_SHORT).show();
             }
@@ -59,15 +61,39 @@ public class LoginActivity extends AppCompatActivity {
         btnAnonymous.setOnClickListener(v -> showAnonymousWarning());
     }
 
+    private boolean isValidUser(String email, String password) {
+        SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+
+        String storedHash = prefs.getString("password_" + email, null);
+        if (storedHash == null) return false;
+
+        String hashedInput = Utils.hash(password);
+        return hashedInput.equals(storedHash);
+    }
+
+    private void goToHome(String userId) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("USER_ID", userId);
+        intent.putExtra("IS_ANONYMOUS", false);
+        startActivity(intent);
+        finish();
+    }
+
     private void showAnonymousWarning() {
         new AlertDialog.Builder(this)
                 .setTitle("Accesso anonimo")
                 .setMessage("In modalità anonima i progressi non saranno salvati. Continuare?")
                 .setPositiveButton("Continua", (dialog, which) -> {
                     SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
-                    prefs.edit().putBoolean("isAnonymous", true).apply();
+                    String anonId = "anonymous_" + System.currentTimeMillis();
+                    prefs.edit()
+                            .putString("current_user_id", anonId)
+                            .putBoolean("isAnonymous", true)
+                            .apply();
 
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.putExtra("USER_ID", anonId);
+                    intent.putExtra("IS_ANONYMOUS", true);
                     startActivity(intent);
                     finish();
                 })

@@ -52,12 +52,13 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
         isAnonymous = prefs.getBoolean("isAnonymous", true);
 
+        updateNavHeader();
+        setupQuickExitButton();
+
         if (isAnonymous) {
             showAnonymousReminder();
         }
 
-        updateNavHeader();
-        setupQuickExitButton();
     }
 
     protected void setupQuickExitButton() {

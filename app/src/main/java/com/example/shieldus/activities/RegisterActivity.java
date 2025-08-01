@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shieldus.R;
+import com.example.shieldus.utils.Utils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -79,13 +80,16 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
+            String hashedPassword = Utils.hash(password);
+
             SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
             prefs.edit()
                     .putString("email", email)
-                    .putString("password", password)
+                    .putString("password_" + email, hashedPassword)
                     .putBoolean("isAnonymous", false)
                     .apply();
 
+            Toast.makeText(this, "Registrazione completata", Toast.LENGTH_SHORT).show();
             showRegistrationSuccessDialog();
         });
     }
