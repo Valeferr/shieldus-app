@@ -24,19 +24,24 @@ ShieldUs nasce per colmare questo divario, offrendo uno **spazio sicuro, anonimo
 - **IDE**: Android Studio
 - **Linguaggio**: Java
 - **Design UI**: Figma (prototipo low-fi e high-fi)
-- **Gestione dati**: SharedPreferences (per dati locali)
+- **API integrate**:
+  - **Google Maps SDK** – per la visualizzazione interattiva della mappa dei servizi
+  - **Fused Location Provider API** – per la geolocalizzazione automatica dell’utente
+  - **Google Places API** – per la ricerca di centri antiviolenza, cliniche e sportelli legali
+- **Gestione dati**: SharedPreferences (dati locali)
 
 ---
 
 ## 🧩 Funzionalità Principali
 
-### 1. **Taso di uscita rapida dall'applicazione**
+### 1. **Taso di uscita rapida dall'applicazione che reindirizza a Google**
 https://github.com/user-attachments/assets/80cea20c-2ec5-4d01-9fd0-cd58f070a4c7
 
 ### 2. **Moduli Educativi Interattivi**
 - Percorsi educativi su consenso, parità di genere e salute sessuale
 - Quiz con feedback personalizzato
 - Gamification per un apprendimento coinvolgente
+- Cronologia dei quiz con barra di avanzamento
 
 https://github.com/user-attachments/assets/b45aa76c-6353-4196-8d87-5cdad1879015
 
@@ -45,6 +50,7 @@ https://github.com/user-attachments/assets/b45aa76c-6353-4196-8d87-5cdad1879015
 - Assistente conversazionale 24/7
 - Risposte basate su casi reali e validate da esperti
 - Guida alle procedure legali e ai contatti utili
+- Esempi di domande iniziali per guidare l’interazione
 
   https://github.com/user-attachments/assets/a2fb13c1-2b87-46b9-bbd2-a3b5db5d2fd3
 
@@ -52,6 +58,7 @@ https://github.com/user-attachments/assets/b45aa76c-6353-4196-8d87-5cdad1879015
 - Trova centri antiviolenza, cliniche specializzate, sportelli legali
 - Geolocalizzazione e filtri avanzati
 - Possibilità di contribuire in modo anonimo
+- Filtraggio dinamico per luogo
 
 
 https://github.com/user-attachments/assets/79deae94-8fd5-4fd3-9914-b286fa29cc97
@@ -112,12 +119,27 @@ Il prototipo include flussi completi per:
   
 ---
 
+## 🔧 Miglioramenti Implementati (Assignment n.4)
+
+Nell’ultima iterazione, sono stati implementati cinque miglioramenti chiave basati su feedback utente:
+
+| Funzionalità | Descrizione |
+|-------------|-----------|
+| **Filtraggio della mappa per luogo** | L’utente può filtrare i servizi per area geografica, migliorando la precisione della ricerca |
+| **Cronologia dei quiz** | Visualizza lo stato di completamento e permette di riprendere i quiz iniziati |
+| **Esempio di domande per il chatbot** | Suggerimenti iniziali per guidare l’utente e ridurre la barriera d’ingresso |
+| **Promemoria modalità anonima** | Pop-up informativo che ricorda che i progressi non vengono salvati in modalità anonima |
+| **Miglioramento del tasto di uscita veloce** | Reindirizza immediatamente a Google per garantire discrezione e sicurezza |
+
+---
+
 ## 📂 Struttura del Progetto
 
 La repository contiene:
-- `Assignment n.1.docx`: Analisi iniziale, personas e requisiti UX
-- `Assignment n.2.docx`: Casi d’uso e analisi comparativa
-- `Assignment n.3.docx`: Design, prototipo e valutazione
+- `Assignment-1.docx`: Analisi iniziale, personas e requisiti UX
+- `Assignment-2.docx`: Casi d’uso e analisi comparativa
+- `Assignment-3.docx`: Design, prototipo e valutazione
+- `Assignment-4.docx`: Design, prototipo e valutazione
 - Cartella `/app/src/main/java/` con codice Java
 - Cartella `/app/src/main/res/layout/` con layout XML
 - Prototipi Figma (link esterno)
@@ -137,6 +159,25 @@ Le principali modifiche apportate:
 - Semplificato il linguaggio dell’interfaccia
 - Aggiunta funzione "Annulla" nei flussi complessi
 - Ottimizzazione per dispositivi mobili (testo più breve, pulsanti più grandi)
+
+---
+
+## 📊 Risultati dei Test di Usabilità
+
+Abbiamo condotto test con **10 utenti** utilizzando:
+- **Questionario QUIS** (scala 1-9)
+- **Valutazione percepita** (ISE, IKS, IPC, IMOT)
+
+### 🔢 Risultati medi:
+| Area | Punteggio |
+|------|---------|
+| Aspetto visivo e organizzazione | 7.25 |
+| Chiarezza dei contenuti | 6.59 |
+| Facilità di apprendimento | 6.98 |
+| Completezza delle funzionalità | 7.48 |
+
+✅ **Punteggio più alto**: **7.48** – capacità percepita del sistema  
+✅ **Impatto educativo**: task "Educazione al consenso" ha ottenuto **4.00/5** in conoscenza acquisita (IKS)
 
 ---
 
